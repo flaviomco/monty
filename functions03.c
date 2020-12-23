@@ -56,18 +56,28 @@ void push(stack_t **stack, unsigned int line_number, char *n)
  */
 void pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *next;
+	stack_t *current = *stack;
 
-	if (stack == NULL || *stack == NULL)
+	if (*stack == NULL)
 	{
-		printf("L%d: can't pop an empty stack\n", line_number);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		frees(*stack);
 		exit(EXIT_FAILURE);
 	}
-
-	next = (*stack)->next; /* save next node's address */
-	free(*stack);
-	*stack = next; /* reassign next node to head */
+	if ((*stack)->next == NULL)
+	{
+		*stack = NULL;
+	}
+	else
+	{
+		*stack = (*stack)->next;
+		(*stack)->prev = NULL;
+	}
+	free(current);
 }
+
+
+
 
 /**
  * swap - swaps the value of the top two elements on the stack
@@ -93,6 +103,8 @@ void swap(stack_t **stack, unsigned int line_number)
 	(*stack)->next->n = temp_a;
 }
 
+
+
 /**
  * nop - does nothing
  * @stack: pointer to stack
@@ -101,6 +113,6 @@ void swap(stack_t **stack, unsigned int line_number)
  */
 void nop(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+(void)stack;
+(void)line_number;
 }
