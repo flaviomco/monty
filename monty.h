@@ -41,5 +41,7 @@ void _mod(stack_t **stack, unsigned int line_number);
 size_t stack_length(stack_t **stack);
 void free_stack(stack_t **stack);
 void free_all(stack_t *stack, char *line, FILE *fp);
+void frees(stack_t *head);
+
 
 #endif /* MONTY_H */

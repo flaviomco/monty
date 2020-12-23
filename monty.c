@@ -49,3 +49,28 @@ int main(int argc, char *argv[])
 	free_all(stack, line, fp);
 	return (EXIT_SUCCESS);
 }
+
+
+/**
+ * frees - To free the stack
+ * @head: pointer to the stack
+ * Return: nothing
+ */
+void frees(stack_t *head)
+{
+	stack_t *tmp;
+
+	if (head == NULL)
+		return;
+	while (head->prev)
+	{
+		head = head->prev;
+	}
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}
